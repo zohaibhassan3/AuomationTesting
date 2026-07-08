@@ -1,3 +1,5 @@
+
+                 // Page Object Model
 import AccountsPage from '../pages/AccountsPage'
 
 describe('Create Account', () => {
