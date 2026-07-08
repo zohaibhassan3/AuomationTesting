@@ -31,7 +31,18 @@ Cypress.on('uncaught:exception', (err, runnable) => {
   return false
 })
 
+Cypress.on('uncaught:exception', (err, runnable) => {
+  if (err.message.includes('did not return a valid number')) {
+    return false // prevents Cypress from failing/reloading on this error
+  }
+  return true // let all other uncaught exceptions fail tests as normal
+})
+
 // 3. Print test name in console
 Cypress.on('test:before:run', (test) => {
   console.log('Running test:', test.title)
+})
+// 4. Scroll and click
+Cypress.Commands.add('scrollAndClick', (selector) => {
+  cy.get(selector).scrollIntoView().click()
 })

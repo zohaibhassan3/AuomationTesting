@@ -56,3 +56,15 @@ Cypress.Commands.add('loginPOS', () => {
     })
   
 })
+ // Verify API / Status code / response message
+Cypress.Commands.add('verifyApi', (method, url, statusCode = 200, message = null) => {
+  cy.intercept(method, `**${url}**`).as('apiCall')
+  cy.wait('@apiCall').then((interception) => {
+    expect(interception.response.statusCode).to.eq(statusCode)
+    cy.log('Status Code: ' + interception.response.statusCode)
+    cy.log('Response: ' + JSON.stringify(interception.response.body))
+    if (message) {
+      expect(interception.response.body.message).to.eq(message)
+    }
+  })
+})
