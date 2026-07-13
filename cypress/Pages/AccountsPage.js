@@ -1,7 +1,10 @@
 class AccountsPage {
   // Locators
   visit() {
-    cy.visit('http://dev2.sianty.com/accounts')
+
+    cy.contains('Business Setup') .trigger('mouseover') .click({ force: true });
+    cy.contains('.MuiListItemButton-root', 'Accounts') .trigger('mouseover') .click({ force: true }); // 
+    
   }
 
   openCreateForm() {

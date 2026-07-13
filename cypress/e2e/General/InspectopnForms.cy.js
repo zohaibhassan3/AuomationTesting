@@ -28,9 +28,6 @@ describe('General',()=>{
      cy.get('[name="sections.0.title"]').type(randomSection1)
      cy.get('[name="sections.0.secondaryTitle"]').type(randomArabicTitle)
     
-     cy.get('.formSubmitBtn > .MuiButtonBase-root').click()
-     cy.contains('Description must be under 500 characters')
-     
      cy.get('.MuiInputBase-root > [name="description"]').clear().type(randomValidDescription)
 
      // Form item fields
@@ -38,9 +35,18 @@ describe('General',()=>{
      cy.get('[name="sections.0.inspectionFormItems.0.secondaryTitle"]').type(randomArabicForm1)
      cy.get('.css-1l34vrx > .MuiGrid-container > :nth-child(3) > .MuiFormControl-root > .MuiInputBase-root').type(randomInvalidDescription)
 
-     // Submit form
+     // Vehicle Type Dropdown
+     cy.contains('Vehicle Type *').closest('.commonSelect').find('input').first().click({ force: true })
+      cy.get('[class*="-option"]').eq(0).click({ force: true })
+
+     // Submit form for validation verification
           cy.get('.formSubmitBtn > .MuiButtonBase-root').click()
-    // cy.get('[name="sections.0.inspectionFormItems.0.description"]').clear().type(randomValidDescription)
-    // cy.get('.formSubmitBtn > .MuiButtonBase-root').click()
+          cy.contains('Description must be under 500 characters')
+
+    // Submit form    
+     cy.get('[name="sections.0.inspectionFormItems.0.description"]').clear().type(randomValidDescription)
+     cy.get('.formSubmitBtn > .MuiButtonBase-root').click()
+
+     cy.contains('Inspection Form created successfully')
     })
 })
