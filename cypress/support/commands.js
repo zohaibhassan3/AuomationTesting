@@ -67,3 +67,4 @@ cy.contains('Label Name *').closest('.commonSelect').find('input').first().click
 // Select Option (change index: 0=first, 1=second, 2=third)
 cy.get('[class*="-option"]').eq(0).click()
 */
+
