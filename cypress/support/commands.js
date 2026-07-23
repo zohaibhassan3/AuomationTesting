@@ -68,3 +68,42 @@ cy.contains('Label Name *').closest('.commonSelect').find('input').first().click
 cy.get('[class*="-option"]').eq(0).click()
 */
 
+// For Signature
+Cypress.Commands.add('sign', (selector) => {
+  cy.get(selector).then(($canvas) => {
+    const canvas = $canvas[0];
+    const rect = canvas.getBoundingClientRect();
+    const ctx = canvas.getContext('2d');
+
+    // Simulate drawing a simple signature
+    canvas.dispatchEvent(new MouseEvent('mousedown', {
+      clientX: rect.left + 20,
+      clientY: rect.top + 60,
+      buttons: 1
+    }));
+
+    canvas.dispatchEvent(new MouseEvent('mousemove', {
+      clientX: rect.left + 80,
+      clientY: rect.top + 30,
+      buttons: 1
+    }));
+
+    canvas.dispatchEvent(new MouseEvent('mousemove', {
+      clientX: rect.left + 140,
+      clientY: rect.top + 70,
+      buttons: 1
+    }));
+
+    canvas.dispatchEvent(new MouseEvent('mousemove', {
+      clientX: rect.left + 200,
+      clientY: rect.top + 40,
+      buttons: 1
+    }));
+
+    canvas.dispatchEvent(new MouseEvent('mouseup', {
+      clientX: rect.left + 240,
+      clientY: rect.top + 50,
+      buttons: 0
+    }));
+  });
+});
